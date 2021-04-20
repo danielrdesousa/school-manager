@@ -1,5 +1,6 @@
-# ![School Manager](logo.png)
-
+<p align="center">
+<img src="logo-laravel.svg" width="400">
+</p>
 > ### Laravel application developed for a developer test.
 
 This repo is functionality complete — PRs and issues welcome!
@@ -16,7 +17,7 @@ Alternative installation is possible without local dependencies relying on [Dock
 
 Clone the repository
 
-    git clone [LINK]
+    git clone https://github.com/danielrdesousa/school-manager
 
 Switch to the repo folder
 
@@ -52,9 +53,9 @@ Start the local development server
 
 You can now access the server at http://localhost:8000
 
-**TL;DR command list**
+**Commands list**
 
-    git clone [LINK]
+    git clone https://github.com/danielrdesousa/school-manager
     cd api
     composer install
     cp .env.example .env
@@ -90,10 +91,14 @@ Run the database seeder and you're done
 To install with [Docker](https://www.docker.com), run following commands:
 
 ```
-git clone [LINK]
+    not yet implemented
+```
+
+<!-- ```
+git clone https://github.com/danielrdesousa/school-manager
 cd api
 cp .env.example.docker .env
-docker run -v $(pwd):/app composer install
+docker run -v $(pwd):/api composer install
 cd ./docker
 docker-compose up -d
 docker-compose exec php php artisan key:generate
@@ -101,13 +106,15 @@ docker-compose exec php php artisan migrate
 docker-compose exec php php artisan passport:install
 docker-compose exec php php artisan db:seed
 docker-compose exec php php artisan serve --host=0.0.0.0
-```
+``` -->
 
 The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api).
 
 ## API Specification
 
-...
+```
+    not yet implemented
+```
 
 <!-- This application adheres to the api specifications set by the [Thinkster](https://github.com/gothinkster) team. This helps mix and match any backend with any other frontend without conflicts.
 

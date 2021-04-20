@@ -1,0 +1,38 @@
+# Docker compose version
+version: '3'
+
+# define network name
+networks:
+    laravel-network:
+
+volumes:
+    mysql_data:
+        driver: local
+
+services:
+    mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        tty: true
+        environment:
+            MYSQL_DATABASE: "school_manager"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+            MYSQL_ROOT_PASSWORD: "password"
+        volumes:
+            - mysql_data:/var/lib/mariadb
+            - ./database:/docker-entrypoint-initdb.d
+        ports:
+            - "3306:3306"
+        networks:
+            - laravel-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: unless-stopped
+        ports:
+            - "9092:80"
+        networks:
+            - laravel-network
+        environment:
+            PMA_HOST: mysql

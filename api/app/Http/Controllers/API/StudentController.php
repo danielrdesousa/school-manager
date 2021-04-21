@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\StudentResource;
+use App\Http\Resources\ClassroomResource;
 
 class StudentController extends Controller
 {
@@ -53,6 +55,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $student = Student::with('classrooms')->where('id', $student->id)->first();
         return response(['student' => new StudentResource($student), 'message' => 'Retrieved successfully'], 200);
     }
 
@@ -65,7 +68,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->update($request->all());
+        $student->update($request->all())->with('classrooms');
 
         return response(['student' => new StudentResource($student), 'message' => 'Update successfully'], 200);
     }
@@ -81,5 +84,56 @@ class StudentController extends Controller
         $student->delete();
 
         return response(['message' => 'Deleted']);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Student  $student
+     * @return \Illuminate\Http\Response
+     */
+    public function createClassrooms(Request $request, Student $student)
+    {
+        $classrooms = $request->input('classrooms');
+        $student->classrooms()->syncWithoutDetaching($classrooms);
+
+        $update_student = Student::with('classrooms')->where('id', $student->id)->first();
+
+        return response(['student' => new StudentResource($update_student), 'message' => 'Retrieved successfully'], 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Student  $student
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyClassrooms(Request $request, Student $student)
+    {
+        $classrooms = $request->input('classrooms');
+        $student->classrooms()->detach($classrooms);
+
+        $update_student = Student::with('classrooms')->where('id', $student->id)->first();
+
+        return response(['student' => new StudentResource($update_student), 'message' => 'Retrieved successfully'], 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Student  $student
+     * @return \Illuminate\Http\Response
+     */
+    public function updateClassrooms(Request $request, Student $student)
+    {
+        $classrooms = $request->input('classrooms');
+        $student->classrooms()->sync($classrooms);
+
+        $update_student = Student::with('classrooms')->where('id', $student->id)->first();
+
+        return response(['student' => new StudentResource($update_student), 'message' => 'Retrieved successfully'], 200);
     }
 }

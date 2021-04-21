@@ -36,6 +36,13 @@ class School extends Model
     ];
 
     /**
+     * The attributes that will not be displayed.
+     *
+     * @var array
+     */
+    protected $hidden = ['classrooms'];
+
+    /**
      * The classrooms that belong to the school.
      */
     public function classrooms()
@@ -50,18 +57,12 @@ class School extends Model
      */
     public function getTotalStudentsAttribute()
     {
-        $total_students = 0;
+        $classrooms = Classroom::withCount('students')->where('school_id', $this->id)->get();
 
-        $classrooms = Classroom::select('id')->where('school_id', $this->id)->get();
-
-        foreach ($classrooms as $classroom) {
-            $hasStudents = ClassroomStudent::select('student_id')->where('classroom_id', $classroom->id)->exists();
-
-            if($hasStudents) {
-                $total_students++;
-            }
+        if(count($classrooms) >= 1) {
+            return $classrooms[0]->students_count;
         }
 
-        return $total_students;
+        return 0;
     }
 }

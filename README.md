@@ -1,7 +1,8 @@
 <p align="center">
 <img src="logo-laravel.svg" width="400">
 </p>
-> ### Laravel application developed for a developer test.
+
+### Laravel application developed for a developer test.
 
 This repo is functionality complete — PRs and issues welcome!
 

@@ -170,6 +170,9 @@ Request headers
 
 Refer the [api specification](#api-specification) for more info.
 
+***Note*** : If you use "insomnia" import json file to make testing easier. [insomnia_school_manager.json](#insomnia_school_manager.json)
+
+
 ----------
  
 # Authentication

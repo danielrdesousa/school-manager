@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use EloquentBuilder;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Classroom;
@@ -15,11 +16,12 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $students = Student::with('classrooms')->get();
+        $students = EloquentBuilder::to(Student::with('classrooms'), request()->filter)->get();
         return response([ 'students' => StudentResource::collection($students), 'message' => 'Retrieved successfully'], 200);
     }
 
@@ -87,7 +89,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Insert a classroom listing for a student.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Student  $student
@@ -104,7 +106,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Remove a classroom listing for a student.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Student  $student
@@ -121,7 +123,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Updates a student's classroom listing.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Student  $student

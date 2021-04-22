@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use EloquentBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -14,13 +15,12 @@ class SchoolController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $schools = School::with('classrooms')->get();
-
-        // $school->course->roster->students->count();
+        $schools = EloquentBuilder::to(School::with('classrooms'), request()->filter)->get();
         return response([ 'schools' => SchoolResource::collection($schools), 'message' => 'Retrieved successfully'], 200);
     }
 

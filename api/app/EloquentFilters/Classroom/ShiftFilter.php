@@ -1,0 +1,22 @@
+<?php
+
+namespace App\EloquentFilters\Classroom;
+
+use Fouladgar\EloquentBuilder\Support\Foundation\Contracts\Filter;
+use Illuminate\Database\Eloquent\Builder;
+
+class ShiftFilter extends Filter
+{
+    /**
+     * Apply the shift condition to the query.
+     *
+     * @param Builder $builder
+     * @param mixed   $value
+     *
+     * @return Builder
+     */
+    public function apply(Builder $builder, $value): Builder
+    {
+        return $builder->where('shift', '=', $value);
+    }
+}

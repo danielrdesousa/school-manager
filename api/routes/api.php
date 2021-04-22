@@ -28,7 +28,6 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::apiResource('students', StudentController::class)->middleware('auth:api');
-
 Route::post('/students/{student}/classrooms', [StudentController::class, 'createClassrooms'])->middleware('auth:api');
 Route::delete('/students/{student}/classrooms', [StudentController::class, 'destroyClassrooms'])->middleware('auth:api');
 Route::put('/students/{student}/classrooms', [StudentController::class, 'updateClassrooms'])->middleware('auth:api');

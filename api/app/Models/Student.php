@@ -21,7 +21,7 @@ class Student extends Model
         'email',
         'phone',
         'birth_date',
-        'sex',
+        'gender',
     ];
 
     /**

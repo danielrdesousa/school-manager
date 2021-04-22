@@ -130,10 +130,11 @@ More information regarding the project can be found here https://github.com/goth
 ## Dependencies
 
 - [Laravel Passport](https://laravel.com/docs/8.x/passport) - For authentication using JSON Web Tokens
-
+- [Eloquent Builder](https://github.com/mohammad-fouladgar/eloquent-builder) - Build eloquent queries based on request parameters
 ## Folders
 
 - `app/Http/Controllers/Api` - Contains all the api controllers
+- `app/EloquentFilters` - Contains all the filters params
 - `config` - Contains all the application configuration files
 - `database/factories` - Contains the model factory for all the models
 - `database/migrations` - Contains all the database migrations
